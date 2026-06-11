@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ── MOBILE (real phone browser) ── fill the whole screen */
+  body {
+    background: #F8F9F4;
+    overflow: hidden;
+  }
+
+  #root {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+  }
+}
+
+@layer components {
+
+  /* ── DESKTOP: centered phone mockup ── */
+  .phone-frame {
+    width: 100%;
+    height: 100%;
+    height: 100dvh;
+    background: #F8F9F4;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* On screens wider than 520px, show as a phone mockup in the center */
+  @media (min-width: 520px) {
+    body {
+      background: #1a1a2e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #root {
+      width: 390px;
+      height: min(844px, 96vh);
+      height: min(844px, 96dvh);
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 24px 80px rgba(0,0,0,0.8);
+    }
+
+    .phone-frame {
+      border-radius: 40px;
+    }
+  }
+
+  .screen-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+
+  .screen-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .status-bar {
+    height: 44px;
+    padding: 14px 24px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .bottom-nav {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* safe area for notched phones */
+    padding: 8px 0 max(16px, env(safe-area-inset-bottom));
+    z-index: 50;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+    flex-shrink: 0;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 52px;
+  }
+
+  .nav-item.active span { color: #2E7D32; font-weight: 600; }
+  .nav-item span { font-size: 10px; color: #6B7280; font-weight: 500; }
+
+  .card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .btn-primary {
+    background: #2E7D32;
+    color: white;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .btn-primary:active { transform: scale(0.98); background: #1B5E20; }
+
+  .btn-secondary {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+    outline: none;
+  }
+
+  .input-field {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #212121;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .input-field:focus { border-color: #2E7D32; }
+  .input-field::placeholder { color: #9CA3AF; }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+    margin-bottom: 12px;
+  }
+
+  .tag-healthy {
+    background: #E8F5E9; color: #2E7D32;
+    padding: 2px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+  }
+
+  .tag-moderate {
+    background: #FFF3E0; color: #FB8C00;
+    padding: 2px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+  }
+
+  .tag-critical {
+    background: #FFEBEE; color: #E53935;
+    padding: 2px 8px; border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+  }
+
+  .content-area {
+    padding: 0 16px;
+    padding-bottom: 80px;
+  }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes scanLine {
+  0%   { top: 0; }
+  100% { top: 100%; }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.4s ease forwards; }
+.animate-fade-in    { animation: fadeIn  0.3s ease forwards; }
+.animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
